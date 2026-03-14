@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-geu7u&ikc63pvwofd&96+h!mzc45yrl9p3o43nvu2#!i%(wkxu'
+SECRET_KEY = 'django-insecure-fnd5lb-iize2ywzl7l&n3-(l0m(nw8vh-7$!3meb#w_y-nrs@5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -120,3 +121,20 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication redirects
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'
+
+# WLOGIN_URL = 'login' → where Django sends users if they try to access a protected page without logging in.
+# LOGIN_REDIRECT_URL = 'dashboard' → where Django sends users after they log in successfully.
+# LOGOUT_REDIRECT_URL = 'login' → where Django sends users after they log out.
+
+# even if you explicitly redirect in your views, these settings in Django are still useful as global defaults.
+# In simple terms:
+
+# LOGIN_URL → Used automatically by @login_required to know where to send users if they are not logged in.
+# LOGIN_REDIRECT_URL → Default page after login if a view does not specify a redirect.
+# LOGOUT_REDIRECT_URL → Default page after logout if a view does not specify a redirect.
+# ✅ So your views can override them, but these settings act as fallback/global behavior for the whole project.
