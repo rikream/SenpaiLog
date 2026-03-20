@@ -1,15 +1,100 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DashBoard</title>
+    <title>SenpaiLog | Dashboard</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/dashboardstyle.css' %}">
 </head>
 <body>
-    <h2>Weolcome {{user.username}}</h2>
-    
-    <p>You are logged in.</p>
 
-    <a href="/logout/">Logout</a>
+    <div class="dashboard-wrapper">
+        <header class="dashboard-header">
+            <div class="screentone-tape"></div>
+            <h1>Welcome, <span class="hero-name">{{user.username}}</span>!</h1>
+            <p>Your SenpaiLog Command Center</p>
+            
+            <div class="action-nav">
+                <a href="/browse/" class="btn-nav">Browse Database</a>
+                <a href="/chatbot/" class="btn-nav btn-ai">Ask Senpai (AI)</a>
+                <a href="/logout/" class="btn-nav btn-logout">Logout</a>
+            </div>
+        </header>
+
+        <div class="tracking-board">
+
+            <!-- Anime Column -->
+            <div class="track-column col-anime">
+                <h2 class="column-title"><a href="/anime/">Anime</a></h2>
+
+                <!-- Example log card — duplicate as needed -->
+                <div class="log-card">
+                    <div class="log-info">
+                        <h3>Attack on Titan</h3>
+                        <span class="type-badge badge-anime">Anime</span>
+                    </div>
+                    <div class="log-progress">Ep 24/87</div>
+                </div>
+
+                <div class="log-card">
+                    <div class="log-info">
+                        <h3>Demon Slayer</h3>
+                        <span class="type-badge badge-anime">Anime</span>
+                    </div>
+                    <div class="log-progress finished">Finished</div>
+                </div>
+
+            </div>
+
+            <!-- Manga Column -->
+            <div class="track-column col-manga">
+                <h2 class="column-title"><a href="/manga/">Manga</a></h2>
+
+                <div class="log-card">
+                    <div class="log-info">
+                        <h3>Berserk</h3>
+                        <span class="type-badge badge-manga">Manga</span>
+                    </div>
+                    <div class="log-progress">Ch 120/364</div>
+                </div>
+
+                <div class="log-card">
+                    <div class="log-info">
+                        <h3>Vagabond</h3>
+                        <span class="type-badge badge-manga">Manga</span>
+                    </div>
+                    <div class="log-progress finished">Finished</div>
+                </div>
+
+            </div>
+
+            <!-- Manhwa Column -->
+            <div class="track-column col-manhwa">
+                <h2 class="column-title"><a href="/manhwa/">Manhwa</a></h2>
+
+                <div class="log-card">
+                    <div class="log-info">
+                        <h3>Solo Leveling</h3>
+                        <span class="type-badge badge-manhwa">Manhwa</span>
+                    </div>
+                    <div class="log-progress">Ch 80/179</div>
+                </div>
+
+                <div class="log-card">
+                    <div class="log-info">
+                        <h3>Tower of God</h3>
+                        <span class="type-badge badge-manhwa">Manhwa</span>
+                    </div>
+                    <div class="log-progress finished">Finished</div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
 </body>
 </html>

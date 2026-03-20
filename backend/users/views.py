@@ -18,7 +18,7 @@ def signup(request):
         user=User.objects.create_user(username=username,password=password)
         # user.save()#You don't need this line:User.objects.create_user()->already saves the user.
         return redirect('login')
-    #this is for get req 
+    #this is for get req -> when visiting the web
     return render(request,"users/signup.html")
     
 def login_user(request):
@@ -41,7 +41,8 @@ def login_user(request):
         # After this:
         # Django stores the user ID in the session
         # The user stays logged in across pages
-        # this handles GET request
+    
+    # this handles GET request
     return render(request, "users/login.html")
     
 
@@ -52,3 +53,7 @@ def dashboard(request):#a dashboard is a page shown after a user logs in.
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+@login_required
+def chatbot(request):
+    return render(request,"users/chatbot.html")

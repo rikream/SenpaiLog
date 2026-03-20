@@ -1,0 +1,224 @@
+/* --- Base Reset & Typography --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* The Dashboard Dotted Background */
+    background-color: #0a0a0a;
+    background-image: radial-gradient(#1f1f1f 15%, transparent 16%),
+        radial-gradient(#1f1f1f 15%, transparent 16%);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* ─────────────────────────────────────────
+   Z-INDEX LAYERS:
+   99  → shurikens
+   61  → fade
+   60  → image (overlaps card)
+   50  → login card
+───────────────────────────────────────── */
+
+#shurikenCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    pointer-events: none;
+}
+
+/* ── CHARACTER IMAGE ── */
+.bg-char {
+    position: fixed;
+    top: -55%;
+    right: -8%;
+    width: 55%;
+    height: 155vh;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 60;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 18%, black 80%, transparent 100%);
+}
+
+/* ── FADE ALIGNMENT ── */
+.fade-left {
+    position: fixed;
+    top: 0;
+    right: calc(48% - 120px);
+    width: 160px;
+    height: 100vh;
+    /* Fades to the new dark background color instead of pure black */
+    background: linear-gradient(to right, #0a0a0a 0%, transparent 100%);
+    z-index: 61;
+    pointer-events: none;
+}
+
+/* ── LOGIN CARD (DASHBOARD MANGA STYLE) ── */
+.login-container {
+    position: relative;
+    z-index: 50;
+    width: 380px;
+    margin-left: 12vw;
+    padding: 40px 34px 32px;
+
+    /* SenpaiLog Vibe */
+    background-color: #121212;
+    border: 6px solid #ff003c;
+    /* Thick Red Border */
+    border-radius: 10px;
+    box-shadow: 15px 15px 0px #ff003c;
+    /* Heavy manga shadow */
+}
+
+/* Dashboard Tape Decoration */
+.screentone-tape {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 100px;
+    height: 25px;
+    background-color: #ffffff;
+    border: 3px solid #000;
+    transform: rotate(-10deg);
+    background-image: repeating-linear-gradient(45deg, #000 0, #000 2px, transparent 2px, transparent 8px);
+    box-shadow: 4px 4px 0px #ff003c;
+    z-index: 10;
+}
+
+/* ── Headings & Text ── */
+h2 {
+    font-family: 'Bangers', cursive;
+    text-align: center;
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 4px 4px 0px #ff003c;
+    margin-bottom: 25px;
+}
+
+/* ── Error Panel ── */
+.error-panel {
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    border: 3px dashed #ff003c;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 800;
+    transform: rotate(1deg);
+}
+
+.error-panel strong {
+    color: #ff003c;
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* ── Inputs ── */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: #cccccc;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    border: 4px solid #ff003c;
+    border-radius: 5px;
+    background: #1a1a1a;
+    box-shadow: 5px 5px 0px #ff003c;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.input-group input::placeholder {
+    color: #666666;
+}
+
+.input-group input:focus {
+    background: #000000;
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0px #ffffff;
+}
+
+/* ── Button ── */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Bangers', cursive;
+    font-size: 1.8rem;
+    color: #000000;
+    background-color: #ffffff;
+    border: 4px solid #ff003c;
+    border-radius: 5px;
+    box-shadow: 6px 6px 0px #ff003c;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.1s ease;
+    margin-top: 15px;
+}
+
+.btn-submit:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0px 0px 0px #ff003c;
+}
+
+.btn-submit:hover {
+    background-color: #e6e6e6;
+}
+
+/* ── Signup Link ── */
+.signup-text {
+    text-align: center;
+    margin-top: 25px;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #aaaaaa;
+}
+
+.signup-text a {
+    display: inline-block;
+    color: #ffffff;
+    text-decoration: none;
+    margin-top: 5px;
+    font-size: 1.2rem;
+    border-bottom: 3px solid #ff003c;
+    transition: all 0.2s;
+}
+
+.signup-text a:hover {
+    color: #ff003c;
+    border-bottom-color: #ffffff;
+    transform: translateX(5px);
+}

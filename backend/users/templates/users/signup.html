@@ -1,34 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Signup</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | Anime Style</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'css/signupstyle.css' %}">
 </head>
 <body>
 
-<h2>Signup</h2>
+    <div class="signup-container">
+        <h2>Signup</h2>
 
-{% if error %}
-<p Style="color:red">{{error}}</p>
-{% endif %}
+        {% if error %}
+        <div class="error-message">
+            <p>{{error}}</p>
+        </div>
+        {% endif %}
 
-<form method="POST">
-    {% csrf_token %}
+        <form method="POST">
+            {% csrf_token %}
 
-    <label>Username</label>
-    <input type="text" name="username" required>
+            <div class="input-group">
+                <input type="text" name="username" required placeholder=" ">
+                <label>Username</label>
+            </div>
 
-    <br><br>
+            <div class="input-group">
+                <input type="password" name="password" required placeholder=" ">
+                <label>Password</label>
+            </div>
 
-    <label>Password</label>
-    <input type="password" name="password" required>
+            <button type="submit" class="btn-submit">Join Now</button>
+        </form>
 
-    <br><br>
-
-    <button type="submit">Signup</button>
-
-</form>
-
-<a href="/">Back to Login</a>
+        <div class="footer-link">
+            Already have an account? <a href="/">Back to Login</a>
+        </div>
+    </div>
 
 </body>
 </html>
