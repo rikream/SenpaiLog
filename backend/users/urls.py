@@ -6,5 +6,8 @@ urlpatterns = [
     path("signup/", views.signup,name="signup"),
     path("logout/",views.logout_user, name="logout"),
     path("dashboard/", views.dashboard,name="dashboard"),
-    path("chatbot/",views.chatbot,name="chatbot")
+    # UI
+    path("chatbot/", views.chatbot_page, name="chatbot_page"),
+    # API
+    path("chatbot/ask-ai/",views.ask_ai, name="chatbot_api")
 ]

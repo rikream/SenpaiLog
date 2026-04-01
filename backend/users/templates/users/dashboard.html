@@ -8,6 +8,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/dashboardstyle.css' %}">
+
 </head>
 <body>
 
@@ -19,7 +20,10 @@
             
             <div class="action-nav">
                 <a href="/browse/" class="btn-nav">Browse Database</a>
-                <a href="/chatbot/" class="btn-nav btn-ai">Ask Senpai (AI)</a>
+
+                <!-- ✅ FIXED LINE -->
+                <a href="{% url 'chatbot_page' %}" class="btn-nav btn-ai">Ask Senpai (AI)</a>
+
                 <a href="/logout/" class="btn-nav btn-logout">Logout</a>
             </div>
         </header>
@@ -30,7 +34,6 @@
             <div class="track-column col-anime">
                 <h2 class="column-title"><a href="/anime/">Anime</a></h2>
 
-                <!-- Example log card — duplicate as needed -->
                 <div class="log-card">
                     <div class="log-info">
                         <h3>Attack on Titan</h3>

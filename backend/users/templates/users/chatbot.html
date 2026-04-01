@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senpai AI</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+
+    <!-- Existing dashboard style -->
+    <link rel="stylesheet" href="{% static 'css/dashboardstyle.css' %}">
+
+    <!-- Chatbot specific style -->
+    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
+</head>
+
+<body>
+
+<div class="dashboard-wrapper">
+
+    <!-- Header (reusing your dashboard vibe) -->
+    <header class="dashboard-header">
+        <h1>💬 Senpai AI</h1>
+        <p>Your personal AI assistant</p>
+
+        <div class="action-nav">
+            <a href="{% url 'dashboard' %}" class="btn-nav">← Back to Dashboard</a>
+        </div>
+    </header>
+
+    <!-- Chat UI -->
+    <div class="chat-container">
+
+        <!-- Chat messages -->
+        <div id="chat-box" class="chat-box"></div>
+
+        <!-- Input -->
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Ask Senpai something..." />
+            <button onclick="sendMessage()">Send</button>     
+            {% comment %}
+                so onlcicking we are uisng sendmesaage fucntion of js 
+            {% endcomment %}
+                
+        </div>
+
+    </div>
+
+</div>
+
+<!-- JS -->
+
+{% comment %}
+    JavaScript moves function declarations to the top internally -> so we can use funtion before declaring it.
+    async means: you can use await (for API calls)
+
+{% endcomment %} 
+<script>
+async function sendMessage() {
+    const input = document.getElementById("user-input");
+    const chatBox = document.getElementById("chat-box");
+
+    const query = input.value.trim();
+    if (!query) return;
+
+    // user message
+    chatBox.innerHTML += `
+        <div class="chat-message user-msg"><b>You:</b> ${query}</div>
+    `;
+
+    input.value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // typing indicator
+    const typing = document.createElement("div");
+    typing.className = "chat-message bot-msg";
+    typing.innerText = "Senpai is thinking...";
+    chatBox.appendChild(typing);
+
+    try {
+        const res = await fetch("/chatbot/ask-ai/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ query: query })
+        });
+
+        const data = await res.json();
+
+        // remove typing
+        typing.remove();
+
+        if (data.error) {
+            chatBox.innerHTML += `
+                <div class="chat-message bot-msg">Error: ${data.error}</div>
+            `;
+        } else {
+            chatBox.innerHTML += `
+                <div class="chat-message bot-msg">
+                    <b>Senpai:</b> ${data.summary}
+                </div>
+            `;
+        }
+
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+    } catch (err) {
+        typing.remove();
+        chatBox.innerHTML += `
+            <div class="chat-message bot-msg">Something went wrong 😭</div>
+        `;
+    }
+}
+
+// Enter key support
+document.getElementById("user-input")
+.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>

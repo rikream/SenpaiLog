@@ -3,6 +3,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
+#importing chatbot
+from django.http import JsonResponse
+import json
+from .ai_chatbot.main import get_ai_response
+
 # Create your views here.
 def signup(request):
     if request.method=="POST":
@@ -57,3 +62,38 @@ def logout_user(request):
 @login_required
 def chatbot(request):
     return render(request,"users/chatbot.html")
+
+
+#this is for chatbot
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
+import json
+
+from .ai_chatbot.main import get_ai_response
+
+
+# 👉 UI PAGE
+def chatbot_page(request):
+    return render(request, "users/chatbot.html")
+
+
+# 👉 API (your existing one — NO CHANGE)
+@csrf_exempt
+def ask_ai(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            query = data.get("query")
+
+            if not query:
+                return JsonResponse({"error": "No query provided"}, status=400)
+
+            response = get_ai_response(query)
+
+            return JsonResponse(response)
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
