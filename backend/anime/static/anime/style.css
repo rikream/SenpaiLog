@@ -1,0 +1,101 @@
+/* ===== GLOBAL ===== */
+body {
+    margin: 0;
+    background: #0a0a0a;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+.title {
+    margin: 20px;
+    font-size: 35px;
+    text-shadow: 2px 2px red;
+}
+
+/* ===== GRID ===== */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ===== CARD ===== */
+.card {
+    background: #111;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    width: 200px;
+    border: 2px solid #ff003c;
+    box-shadow: 0 0 10px #ff003c;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* ===== IMAGE ===== */
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* ===== BUTTON ===== */
+.view-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: 2px solid #ff003c;
+    color: white;
+    text-decoration: none;
+}
+
+.view-btn:hover {
+    background: #ff003c;
+}
+
+/* ===== DETAILS PAGE ===== */
+.details {
+    width: 60%;
+    margin: auto;
+}
+
+.details img {
+    width: 250px;
+    margin: 10px 0;
+}
+
+.synopsis {
+    max-width: 600px;
+    margin: auto;
+    color: #ccc;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 15px;
+    border: 2px solid #ff003c;
+    text-decoration: none;
+    color: white;
+}
+
+.back-btn:hover {
+    background: #ff003c;
+}
+
+.controls {
+    margin: 20px;
+}
+
+.controls input,
+.controls select,
+.controls button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+}

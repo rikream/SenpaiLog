@@ -19,9 +19,10 @@
             <p>Your SenpaiLog Command Center</p>
             
             <div class="action-nav">
-                <a href="/browse/" class="btn-nav">Browse Database</a>
+                <a href="{% url 'browse_anime' %}" class="btn-nav">Browse Anime</a>
+                
 
-                <!-- ✅ FIXED LINE -->
+                <!--  FIXED LINE -->
                 <a href="{% url 'chatbot_page' %}" class="btn-nav btn-ai">Ask Senpai (AI)</a>
 
                 <a href="/logout/" class="btn-nav btn-logout">Logout</a>
