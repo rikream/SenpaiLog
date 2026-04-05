@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anime Tracker</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracking/css/style.css' %}">
+</head>
+
+<body>
+
+<h1 class="title">🎌 Anime Tracker</h1>
+
+<!-- 🔍 SEARCH -->
+<form method="GET" class="search-bar">
+    <input type="text" name="q" placeholder="Search anime..." value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+<!-- 🎴 ANIME GRID -->
+<div class="anime-grid">
+{% for item in results %}
+    <div class="card">
+
+        <div class="img-box">
+            <img src="{{ item.image }}">
+        </div>
+
+        <div class="info">
+            <h3>{{ item.title }}</h3>
+
+            <!-- ➕ ADD -->
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="title" value="{{ item.title }}">
+                <input type="hidden" name="image" value="{{ item.image }}">
+                <button class="btn add">+ Add</button>
+            </form>
+
+            <!-- 🔁 STATUS -->
+            {% for obj in watched %}
+                {% if obj.title == item.title %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="toggle_id" value="{{ obj.id }}">
+                        <button class="btn watched">✔ Watched</button>
+                    </form>
+                {% endif %}
+            {% endfor %}
+
+            {% for obj in not_watched %}
+                {% if obj.title == item.title %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="toggle_id" value="{{ obj.id }}">
+                        <button class="btn not-watched">👁 Not Watched</button>
+                    </form>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+
+    </div>
+{% endfor %}
+</div>
+
+<!-- 🔥 LOAD MORE -->
+<form method="GET" class="load-more-form">
+    {% if query %}
+        <input type="hidden" name="q" value="{{ query }}">
+    {% endif %}
+    <input type="hidden" name="page" value="{{ page|add:1 }}">
+    
+    <button type="submit" class="load-more">Load More</button>
+</form>
+
+</body>
+</html>
